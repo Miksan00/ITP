@@ -1,0 +1,98 @@
+<%@page import="java.sql.DriverManager"%>
+<%@page import="java.sql.ResultSet"%>
+<%@page import="java.sql.Statement"%>
+<%@page import="java.sql.Connection"%>
+<%
+String driver = "com.mysql.jdbc.Driver";
+String connectionUrl = "jdbc:mysql://localhost:3306/";
+String database = "hotel";
+String userid = "root";
+String password = "";
+String search = request.getParameter("search");
+
+
+
+try {
+Class.forName(driver);
+} catch (ClassNotFoundException e) {
+e.printStackTrace();
+}
+Connection connection = null;
+Statement statement = null;
+ResultSet resultSet = null;
+%>
+<!DOCTYPE html>
+<html>
+
+<body>
+	<div class="container" style="margin-left: 20%; padding-top: 5%">
+	<%@include file="header.jsp"%>
+<form class="form-inline" method="post" action="vehiclebookingsearch.jsp">
+<input type="text" name="search" class="form-control" placeholder="Search here....">
+<button type="submit" name="save" class="btn btn-primary">Search</button>
+</form>
+
+
+<table class="table table-bordered">
+			<thead>
+				<tr>
+
+					<th>User Name</th>
+					<th>NIC</th>
+					<th>Mobile</th>
+					<th>Email</th>
+					<th>Check In</th>
+					<th>Km</th>
+					<th>Payment</th>
+					<th>Actions</th>
+					
+				</tr>
+			</thead>
+					<tbody>
+<%
+try{
+connection = DriverManager.getConnection(connectionUrl+database, userid, password);
+statement=connection.createStatement();
+String sql = "SELECT * FROM veichlereservation WHERE user LIKE '%" + search + "%' OR nic LIKE '%" + search + "%' OR mobile LIKE '%" + search + "%' OR email LIKE '%" + search + "%'  OR checkin LIKE '%" + search + "%'   OR km LIKE '%" + search + "%' OR cost LIKE '%" + search + "%'  ";
+System.out.println(sql);
+resultSet = statement.executeQuery(sql);
+
+while(resultSet.next()){
+	/* int id = 9;
+	System.out.println(id); */
+ %> 
+
+
+
+
+<tr>
+<td><%=resultSet.getString("user") %></td>
+<td><%=resultSet.getString("nic") %></td>
+<td><%=resultSet.getString("mobile") %></td>
+
+<td><%=resultSet.getString("email") %></td>
+<td><%=resultSet.getString("checkin") %></td>
+
+<td><%=resultSet.getString("km") %></td>
+<td><%=resultSet.getString("cost") %></td>
+<c:forEach var="user" items="${listbooking}">
+<td><a href="editveichleBook?id=<%=resultSet.getInt("id")%>">Edit</a>
+    &nbsp;&nbsp;&nbsp;&nbsp; 
+    <a href="deleteveichleBook?id=<%=resultSet.getInt("id")%>">Delete</a>
+</td>
+
+						
+					</c:forEach>
+</tr>
+<%
+}
+connection.close();
+} catch (Exception e) {
+e.printStackTrace(); 
+}
+%>
+</table>
+</div>
+</body>
+
+</html>
