@@ -45,7 +45,7 @@ public class AdminAcceptController extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		HttpSession session = request.getSession();
-
+		// checking test my code
 		try {
 				
 			String COMMAND = request.getParameter("COMMAND");
