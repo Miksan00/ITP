@@ -6,6 +6,7 @@
 String date=request.getParameter("date");
 String reasons=request.getParameter("reasons");
 
+  <!-- try and catch -->
 try
 {
 	Connection con=ConnectionProvider.getCon();
@@ -21,3 +22,5 @@ catch(Exception e)
 	response.sendRedirect("EM_addHoliday.jsp");
 }
 %>
+
+
