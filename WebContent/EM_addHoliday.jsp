@@ -243,6 +243,7 @@ img{
 	height:100px;
 	
 }
+    
 
 </style>
 </head>
@@ -296,7 +297,7 @@ img{
 		<div class="Copyrights">
 			
 			<h4>Copyrights</h4>
-			<p>©2023 Batch SLIIT ITP Group TW21 Students </p>
+			<p>ï¿½2023 Batch SLIIT ITP Group TW21 Students </p>
 			
 		
 		</div>
