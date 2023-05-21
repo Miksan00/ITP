@@ -47,7 +47,7 @@ public class AdminAcceptController extends HttpServlet {
 		HttpSession session = request.getSession();
 
 		try {
-				
+				// checking my controller part
 			String COMMAND = request.getParameter("COMMAND");
 			
 			if(COMMAND == null) {
